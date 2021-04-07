@@ -41,6 +41,31 @@ class LSM6DS3Class {
     virtual float gyroscopeSampleRate(); // Sampling rate of the sensor.
     virtual int gyroscopeAvailable(); // Check for available data from gyroscopeAvailable
 
+    // Interrupts - Used INT2 pin
+    void enableInterruptPin(){
+      //writeRegister(0x13,0b00000000);
+      writeRegister(0x12, 0b00110100);
+      //writeRegister(0x0E, 0b00000000);
+
+     /* writeRegister(0x5C,0b10000000);
+      writeRegister(0x5D,0b0001111);
+      writeRegister(0x5F,0b00010000);
+      writeRegister(0x58,0b1);*/
+    }
+    void setOpenDrain(){}
+    void setPushPull(){}
+
+    void print(){
+      Serial.print("Int src: ");
+      Serial.println(readRegister(0x53),BIN);
+      Serial.print("FF src: ");
+      Serial.println(readRegister(0x1B),BIN);
+    }
+/*
+    NT2_CTRL        (0Eh)     data ready
+    CTRL3_C        (12h) push/open
+    MD2_CFG        (5Fh) routing
+*/
 
   private:
     int readRegister(uint8_t address);

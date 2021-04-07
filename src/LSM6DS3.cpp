@@ -24,6 +24,7 @@
 #define LSM6DS3_WHO_AM_I_REG       0X0F
 #define LSM6DS3_CTRL1_XL           0X10
 #define LSM6DS3_CTRL2_G            0X11
+#define LSM6DS3_CTRL2_G            0X12
 
 #define LSM6DS3_STATUS_REG         0X1E
 
@@ -94,6 +95,14 @@ int LSM6DS3Class::begin()
   // Set the ODR config register to ODR/4
   writeRegister(LSM6DS3_CTRL8_XL, 0x09);
 
+  //writeRegister(0X12, 0b00010100);
+  /*writeRegister(0x0E, 0b11100000);      //INT2 pin
+  writeRegister(0x1B, 00100000);  //WAKE_UP_SRC        
+  writeRegister(0x5C, 0b10000000);
+  writeRegister(0x5D, 0b00001001);  //FREE_FALL        
+  //CTRL3_C        
+  writeRegister(0x12, (readRegister(0x12) | 0b01000100) | 0b01110100);//opne drain active low
+*/
   return 1;
 }
 
